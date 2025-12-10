@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>letter case conversion</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+
+    </style>
+</head>
+
+<body class="fw-bold">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <button id="upper" class="btn btn-lg btn-dark">UPPER</button>
+                <button id="lower" class="btn btn-lg btn-dark">lower</button>
+                <button id="title" class="btn btn-lg btn-dark">Title</button>
+                <button id="copy" class="btn btn-lg btn-dark float-end">copy</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <textarea id="textarea" class="w-100" rows="10"></textarea>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script>
+        //取得 HTML 元素
+        const textarea = document.getElementById('textarea');
+        const btnUpper = document.getElementById('upper');
+        const btnLower = document.getElementById('lower');
+        const btnTitle = document.getElementById('title');
+        const btnCopy = document.getElementById('copy');
+
+        //設定 UPPER 按鈕事件：全部轉大寫
+        btnUpper.addEventListener('click', function () {
+            textarea.value = textarea.value.toUpperCase();
+        });
+
+        //設定 lower 按鈕事件：全部轉小寫
+        btnLower.addEventListener('click', function () {
+            textarea.value = textarea.value.toLowerCase();
+        });
+
+        //設定 Title 按鈕事件：每一行首字大寫，其餘小寫
+        btnTitle.addEventListener('click', function () {
+            // 取得目前文字，並用換行符號 (\n) 切割成陣列
+            let lines = textarea.value.split('\n');
+
+            // 遍歷每一行進行處理
+            let newLines = lines.map(function (line) {
+                // 如果該行為空，直接回傳
+                if (line.length === 0) return line;
+
+                // 取出第一個字轉大寫 + 取出第二個字以後的內容轉小寫
+                return line.charAt(0).toUpperCase() + line.slice(1).toLowerCase();
+            });
+
+            // 將處理好的陣列用換行符號接回去，並填回 textarea
+            textarea.value = newLines.join('\n');
+        });
+
+        btnCopy.addEventListener('click', function () {
+            // 呼叫 Clipboard API 寫入剪貼簿
+            navigator.clipboard.writeText(textarea.value)
+                .then(function () {
+                    // 成功時的動作 (例如跳出提示)
+                    //alert("文字已成功複製！");
+                })
+                .catch(function (err) {
+                    // 失敗時的動作
+                    console.error("複製失敗:", err);
+                });
+        });
+    </script>
+</body>
+
+</html>

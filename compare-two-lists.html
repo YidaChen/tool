@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>compare two lists</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+
+    </style>
+</head>
+
+<body class="fw-bold">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <p class="m-0 text-center">List A (<span id="listACount"></span>)</p>
+                <textarea id="listA" class="w-100" rows="10"></textarea>
+            </div>
+            <div class="col">
+                <p class="m-0 text-center">List B (<span id="listBCount"></span>)</p>
+                <textarea id="listB" class="w-100" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <button id="compare">compare lists</button>
+            </div>
+            <div class="col-8">
+                <label><input id="caseInsensitive" type="checkbox"> case insensitive</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col">
+                    <p class="m-0 text-center">Only in list A (<span id="onlyInACount"></span>)</p>
+                    <textarea id="onlyInA" class="w-100" rows="10"></textarea>
+                </div>
+                <div class="col">
+                    <p class="m-0 text-center">Only in list B (<span id="onlyInBCount"></span>)</p>
+                    <textarea id="onlyInB" class="w-100" rows="10"></textarea>
+                </div>
+                <div class="col">
+                    <p class="m-0 text-center">In both lists (<span id="inBothCount"></span>)</p>
+                    <textarea id="inBoth" class="w-100" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script>
+        function splitToList(str) {
+            return str
+                .split(/\r?\n/) // 依換行分割 (兼容 Windows / Unix)
+                .map(line => line.trim()) // 去除每行前後空白
+                .filter(line => line !== ""); // (可選) 移除空行
+        }
+
+        document.querySelector('#compare').addEventListener('click', () => {
+
+            let A = splitToList(document.getElementById("listA").value);
+            let B = splitToList(document.getElementById("listB").value);
+
+            if (document.getElementById("caseInsensitive").checked) {
+                A = A.map(s => s.toLowerCase());
+                B = B.map(s => s.toLowerCase());
+            }
+
+            // 轉成 Set，加速查找
+            let setA = new Set(A);
+            let setB = new Set(B);
+
+            let onlyInA = A.filter(x => !setB.has(x));
+            let onlyInB = B.filter(x => !setA.has(x));
+            let inBoth = A.filter(x => setB.has(x));
+
+            console.log({ onlyInA, onlyInB, inBoth });
+
+            document.getElementById("onlyInA").value = onlyInA.join("\n");
+            document.getElementById("onlyInB").value = onlyInB.join("\n");
+            document.getElementById("inBoth").value = inBoth.join("\n");
+
+            document.getElementById("listACount").textContent = A.length;
+            document.getElementById("listBCount").textContent = B.length;
+            document.getElementById("onlyInACount").textContent = onlyInA.length;
+            document.getElementById("onlyInBCount").textContent = onlyInB.length;
+            document.getElementById("inBothCount").textContent = inBoth.length;
+        });
+    </script>
+</body>
+
+</html>
