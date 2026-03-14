@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000000;
+    overflow: hidden;
+}
+
+.calculator {
+    width: 340px;
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.calculator.scientific {
+    width: 480px; /* Wider for scientific mode */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.display {
+    background: transparent;
+    padding: 40px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    word-wrap: break-word;
+    word-break: break-all;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.previous-operand {
+    color: rgba(148, 163, 184, 0.8);
+    font-size: 1.1rem;
+    min-height: 24px;
+    margin-bottom: 8px;
+}
+
+.current-operand {
+    color: #f8fafc;
+    font-size: 3.5rem;
+    font-weight: 300;
+    min-height: 68px;
+    letter-spacing: -1px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns for scientific */
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    overflow: hidden;
+}
+
+button {
+    cursor: pointer;
+    font-size: 1.35rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #e2e8f0;
+    padding: 22px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+button:active::before {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+    transition: transform 0s, opacity 0s;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+button:active {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.operator {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.03);
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.operator:hover {
+    background: rgba(56, 189, 248, 0.1);
+}
+
+.top-btn {
+    color: #f43f5e;
+    background: rgba(244, 63, 94, 0.03);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.top-btn:hover {
+    background: rgba(244, 63, 94, 0.1);
+}
+
+.math-func {
+    color: #cbd5e1;
+    background: rgba(255, 255, 255, 0.015);
+    font-size: 1.15rem;
+    font-weight: 400;
+}
+
+.math-func:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.equals-btn {
+    background: #0ea5e9;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.equals-btn:hover {
+    background: #0284c7;
+}
+
+.equals-btn::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.bottom-left {
+    border-bottom-left-radius: 24px;
+}
+
+.bottom-right {
+    border-bottom-right-radius: 24px;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 500px) {
+    .calculator.scientific {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttons {
+        flex: 1;
+        border-radius: 0;
+    }
+    
+    .bottom-left, .bottom-right {
+        border-radius: 0;
+    }
+    
+    button {
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+}

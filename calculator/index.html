@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Web Calculator</title>
+    <meta name="description" content="A modern and beautiful engineering web calculator">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator scientific">
+        <div class="display">
+            <div data-previous-operand class="previous-operand"></div>
+            <div data-current-operand class="current-operand">0</div>
+        </div>
+        <div class="buttons">
+            <!-- Row 1 -->
+            <button data-function class="math-func" id="btn-sin">sin</button>
+            <button data-function class="math-func" id="btn-cos">cos</button>
+            <button data-function class="math-func" id="btn-tan">tan</button>
+            <button data-all-clear class="top-btn" id="btn-ac">AC</button>
+            <button data-delete class="top-btn" id="btn-del">DEL</button>
+            
+            <!-- Row 2 -->
+            <button data-function class="math-func" id="btn-log">log</button>
+            <button data-function class="math-func" id="btn-ln">ln</button>
+            <button data-function class="math-func" id="btn-sqrt">√</button>
+            <button data-function class="math-func" id="btn-square">x²</button>
+            <button data-operation class="operator" id="btn-divide">÷</button>
+
+            <!-- Row 3 -->
+            <button data-constant class="math-func" id="btn-pi">π</button>
+            <button data-number id="btn-7">7</button>
+            <button data-number id="btn-8">8</button>
+            <button data-number id="btn-9">9</button>
+            <button data-operation class="operator" id="btn-multiply">×</button>
+
+            <!-- Row 4 -->
+            <button data-constant class="math-func" id="btn-e">e</button>
+            <button data-number id="btn-4">4</button>
+            <button data-number id="btn-5">5</button>
+            <button data-number id="btn-6">6</button>
+            <button data-operation class="operator" id="btn-subtract">-</button>
+
+            <!-- Row 5 -->
+            <button data-operation class="math-func" id="btn-power">x^y</button>
+            <button data-number id="btn-1">1</button>
+            <button data-number id="btn-2">2</button>
+            <button data-number id="btn-3">3</button>
+            <button data-operation class="operator" id="btn-add">+</button>
+
+            <!-- Row 6 -->
+            <button data-constant class="math-func bottom-left" id="btn-rand">RND</button>
+            <button data-number id="btn-0">0</button>
+            <button data-number id="btn-dot">.</button>
+            <button data-equals class="span-two bottom-right equals-btn" id="btn-equals">=</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
