@@ -20,6 +20,7 @@
                 <button id="upper" class="btn btn-lg btn-dark">UPPER</button>
                 <button id="lower" class="btn btn-lg btn-dark">lower</button>
                 <button id="title" class="btn btn-lg btn-dark">Title</button>
+                <button id="reverse" class="btn btn-lg btn-dark">Reverse</button>
                 <button id="copy" class="btn btn-lg btn-dark float-end">copy</button>
             </div>
         </div>
@@ -38,7 +39,12 @@
         const btnUpper = document.getElementById('upper');
         const btnLower = document.getElementById('lower');
         const btnTitle = document.getElementById('title');
+        const btnReverse = document.getElementById('reverse');
         const btnCopy = document.getElementById('copy');
+
+        btnReverse.addEventListener('click', function () {
+            textarea.value = textarea.value.split("").reverse().join("");
+        });
 
         //設定 UPPER 按鈕事件：全部轉大寫
         btnUpper.addEventListener('click', function () {
