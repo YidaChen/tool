@@ -21,6 +21,8 @@
                 <button id="lower" class="btn btn-lg btn-dark">lower</button>
                 <button id="title" class="btn btn-lg btn-dark">Title</button>
                 <button id="reverse" class="btn btn-lg btn-dark">Reverse</button>
+                <button id="trim" class="btn btn-lg btn-dark">Trim</button>
+                <button id="distinct" class="btn btn-lg btn-dark">Distinct</button>
                 <button id="copy" class="btn btn-lg btn-dark float-end">copy</button>
             </div>
         </div>
@@ -40,7 +42,24 @@
         const btnLower = document.getElementById('lower');
         const btnTitle = document.getElementById('title');
         const btnReverse = document.getElementById('reverse');
+        const btnTrim = document.getElementById('trim');
+        const btnDistinct = document.getElementById('distinct');
         const btnCopy = document.getElementById('copy');
+
+        btnDistinct.addEventListener('click', function () {
+            const seen = new Set();
+            textarea.value = textarea.value.split('\n').filter(function (line) {
+                if (seen.has(line)) return false;
+                seen.add(line);
+                return true;
+            }).join('\n');
+        });
+
+        btnTrim.addEventListener('click', function () {
+            textarea.value = textarea.value.split('\n').map(function (line) {
+                return line.trim();
+            }).join('\n');
+        });
 
         btnReverse.addEventListener('click', function () {
             textarea.value = textarea.value.split("").reverse().join("");
